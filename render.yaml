@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: signal-clone-backend
+    runtime: docker
+
+    rootDir: backend
+    dockerfilePath: ./Dockerfile
+    dockerContext: ./backend
+
+    healthCheckPath: /health
+
+    envVars:
+      - key: DATABASE_URL
+        value: sqlite+aiosqlite:///./data/signal.db
+
+      - key: SECRET_KEY
+        generateValue: true
+
+      - key: MOCK_OTP
+        value: "123456"
+
+    disk:
+      name: signal-clone-data
+      mountPath: /app/data
+      sizeGB: 1
