@@ -37,7 +37,7 @@ app = FastAPI(title="Signal Clone API", version="1.0.0", lifespan=lifespan)
 allowed_origins = [
     "http://localhost:3001",
     "http://127.0.0.1:3001",
-    "https://signal-clone-nu.vercel.app"
+    "https://secured-messaging-app.vercel.app/"
 ]
 
 app.add_middleware(
