@@ -34,11 +34,7 @@ async def lifespan(app: FastAPI):
 app = FastAPI(title="Signal Clone API", version="1.0.0", lifespan=lifespan)
 
 # Allow configured origins (comma-separated in env) or default to localhost + production frontend URL
-allowed_origins = [
-    "http://localhost:3001",
-    "http://127.0.0.1:3001",
-    "https://secured-messaging-app.vercel.app/"
-]
+allowed_origins = ["*"]
 
 app.add_middleware(
     CORSMiddleware,
