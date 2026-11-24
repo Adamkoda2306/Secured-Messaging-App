@@ -1,22 +1,5 @@
 import sys
 import asyncio
-
-if sys.platform == 'win32':
-    # Workaround for https://github.com/encode/uvicorn/issues/1183
-    # Suppresses noisy "ConnectionResetError: [WinError 10054]" in ProactorEventLoop
-    from functools import wraps
-    try:
-        from asyncio.proactor_events import _ProactorBasePipeTransport
-        def patched_call_connection_lost(self, exc):
-            try:
-                self._original_call_connection_lost(exc)
-            except ConnectionResetError:
-                pass
-        _ProactorBasePipeTransport._original_call_connection_lost = _ProactorBasePipeTransport._call_connection_lost
-        _ProactorBasePipeTransport._call_connection_lost = patched_call_connection_lost
-    except ImportError:
-        pass
-
 import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
